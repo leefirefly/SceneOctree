@@ -1,0 +1,8 @@
+prefix=/home/lee_firefly/catkin_ws/install
+
+Name: node_example
+Description: Description of node_example
+Version: 0.0.1
+Cflags: -I/home/lee_firefly/catkin_ws/install/include
+Libs: -L/home/lee_firefly/catkin_ws/install/lib 
+Requires: dynamic_reconfigure message_runtime roscpp rosgraph_msgs rospy std_msgs

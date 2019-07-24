@@ -1,0 +1,8 @@
+prefix=/home/lee_firefly/catkin_ws/install
+
+Name: sceneOctree_ros
+Description: Description of sceneOctree_ros
+Version: 0.1.0
+Cflags: -I/home/lee_firefly/catkin_ws/install/include -I/opt/ros/kinetic/include
+Libs: -L/home/lee_firefly/catkin_ws/install/lib -lsceneOctree_ros /opt/ros/kinetic/lib/liboctomap.so /opt/ros/kinetic/lib/liboctomath.so
+Requires: octomap_ros

@@ -1,0 +1,19 @@
+<package>
+  <name>sceneOctree_ros</name>
+  <version>0.1.0</version>
+  <description>
+    sceneOctree_ros is created by LiLiang for using Octree to storage Scene.
+
+  </description>
+  <author email="lee_firefly@foxmail.com">Liang Li</author>
+  <maintainer email="lee_firefly@foxmail.com">Liang Li</maintainer>
+  <license>BSD</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>octomap_ros</build_depend>
+  <build_depend>octomap</build_depend>
+
+  <run_depend>octomap_ros</run_depend>
+  <run_depend>octomap</run_depend>
+</package>

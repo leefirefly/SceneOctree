@@ -1,0 +1,27 @@
+(cl:defpackage rosplane_msgs-msg
+  (:use )
+  (:export
+   "<AREAVERTEX>"
+   "AREAVERTEX"
+   "<COMMAND>"
+   "COMMAND"
+   "<CONTROLLER_COMMANDS>"
+   "CONTROLLER_COMMANDS"
+   "<CONTROLLER_INTERNALS>"
+   "CONTROLLER_INTERNALS"
+   "<CURRENT_PATH>"
+   "CURRENT_PATH"
+   "<FORMATION>"
+   "FORMATION"
+   "<MULTIVAGOAL>"
+   "MULTIVAGOAL"
+   "<PATH>"
+   "PATH"
+   "<STATE>"
+   "STATE"
+   "<VIRTUALAGENT>"
+   "VIRTUALAGENT"
+   "<WAYPOINT>"
+   "WAYPOINT"
+  ))
+

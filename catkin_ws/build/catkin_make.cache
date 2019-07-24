@@ -1,0 +1,2 @@
+abstract_msgs:beginner_tutorials:octomap_ros:rosplane_msgs:scene_octree_ros
+-DCATKIN_DEVEL_PREFIX=/home/lee_firefly/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/lee_firefly/catkin_ws/install -G Unix Makefiles

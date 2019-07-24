@@ -1,0 +1,27 @@
+(cl:defpackage abstract_msgs-msg
+  (:use )
+  (:export
+   "<ACTIVEACTORS>"
+   "ACTIVEACTORS"
+   "<ACTORQUERY>"
+   "ACTORQUERY"
+   "<EVENTQUERY>"
+   "EVENTQUERY"
+   "<EVENTRESULT>"
+   "EVENTRESULT"
+   "<EVENTSCENEMAP>"
+   "EVENTSCENEMAP"
+   "<LAYERQUERY>"
+   "LAYERQUERY"
+   "<QUERY>"
+   "QUERY"
+   "<QUERYRESULT>"
+   "QUERYRESULT"
+   "<SCENEQUERY>"
+   "SCENEQUERY"
+   "<STATIONDATA>"
+   "STATIONDATA"
+   "<UNIFIEDDATA>"
+   "UNIFIEDDATA"
+  ))
+
