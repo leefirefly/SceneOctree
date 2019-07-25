@@ -1,8 +1,0 @@
-prefix=/home/lee_firefly/catkin_ws/install
-
-Name: scene_octree_ros
-Description: Description of scene_octree_ros
-Version: 0.0.0
-Cflags: -I/home/lee_firefly/catkin_ws/install/include
-Libs: -L/home/lee_firefly/catkin_ws/install/lib -lscene_octree_ros
-Requires: abstract_msgs octomap_ros roscpp rosplane_msgs

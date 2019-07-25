@@ -1,0 +1,8 @@
+prefix=/home/lee_firefly/SceneOcTree/catkin_ll/devel
+
+Name: octree_use
+Description: Description of octree_use
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/lee_firefly/SceneOcTree/catkin_ll/devel/lib 
+Requires: 

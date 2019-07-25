@@ -1,0 +1,8 @@
+prefix=/home/lee_firefly/SceneOcTree/catkin_ll/devel
+
+Name: rosplane_msgs
+Description: Description of rosplane_msgs
+Version: 0.0.0
+Cflags: -I/home/lee_firefly/SceneOcTree/catkin_ll/devel/include
+Libs: -L/home/lee_firefly/SceneOcTree/catkin_ll/devel/lib 
+Requires: std_msgs
