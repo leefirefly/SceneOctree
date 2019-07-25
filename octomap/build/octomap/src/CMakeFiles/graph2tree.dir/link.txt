@@ -1,0 +1,1 @@
+g++   -std=c++11 -Wall -Wno-error   -O3 -funroll-loops -DNDEBUG    CMakeFiles/graph2tree.dir/graph2tree.cpp.o  -o ../../../bin/graph2tree  -L/home/lee_firefly/octomap/lib -rdynamic ../../../lib/liboctomap.so.1.9.0 ../../../lib/liboctomath.so.1.9.0 -Wl,-rpath,/home/lee_firefly/octomap/lib: 
