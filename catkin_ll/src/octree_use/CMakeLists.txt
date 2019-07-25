@@ -38,8 +38,8 @@ add_executable(bag2octree src/bag2octree.cpp)
 target_link_libraries(bag2octree ${catkin_LIBRARIES})
 #add_dependencies(bag2octree beginner_tutorials_generate_messages_cpp)
 
-#add_executable(octree_test src/octree_test.cpp)
-#target_link_libraries(octree_test ${catkin_LIBRARIES})
+add_executable(octree_test src/octree_test.cpp)
+target_link_libraries(octree_test ${catkin_LIBRARIES})
 #add_dependencies(octree_test beginner_tutorials_generate_messages_cpp)
 
 add_executable(sendMaker src/sendMaker.cpp)

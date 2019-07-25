@@ -166,6 +166,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+octree_use/CMakeFiles/octree_test.dir/rule:
+	cd /home/lee_firefly/SceneOcTree/catkin_ll/build && $(MAKE) -f CMakeFiles/Makefile2 octree_use/CMakeFiles/octree_test.dir/rule
+.PHONY : octree_use/CMakeFiles/octree_test.dir/rule
+
+# Convenience name for target.
+octree_test: octree_use/CMakeFiles/octree_test.dir/rule
+
+.PHONY : octree_test
+
+# fast build rule for target.
+octree_test/fast:
+	cd /home/lee_firefly/SceneOcTree/catkin_ll/build && $(MAKE) -f octree_use/CMakeFiles/octree_test.dir/build.make octree_use/CMakeFiles/octree_test.dir/build
+.PHONY : octree_test/fast
+
+# Convenience name for target.
 octree_use/CMakeFiles/talker.dir/rule:
 	cd /home/lee_firefly/SceneOcTree/catkin_ll/build && $(MAKE) -f CMakeFiles/Makefile2 octree_use/CMakeFiles/talker.dir/rule
 .PHONY : octree_use/CMakeFiles/talker.dir/rule
@@ -402,6 +417,33 @@ src/bag2octree.cpp.s:
 	cd /home/lee_firefly/SceneOcTree/catkin_ll/build && $(MAKE) -f octree_use/CMakeFiles/bag2octree.dir/build.make octree_use/CMakeFiles/bag2octree.dir/src/bag2octree.cpp.s
 .PHONY : src/bag2octree.cpp.s
 
+src/octree_test.o: src/octree_test.cpp.o
+
+.PHONY : src/octree_test.o
+
+# target to build an object file
+src/octree_test.cpp.o:
+	cd /home/lee_firefly/SceneOcTree/catkin_ll/build && $(MAKE) -f octree_use/CMakeFiles/octree_test.dir/build.make octree_use/CMakeFiles/octree_test.dir/src/octree_test.cpp.o
+.PHONY : src/octree_test.cpp.o
+
+src/octree_test.i: src/octree_test.cpp.i
+
+.PHONY : src/octree_test.i
+
+# target to preprocess a source file
+src/octree_test.cpp.i:
+	cd /home/lee_firefly/SceneOcTree/catkin_ll/build && $(MAKE) -f octree_use/CMakeFiles/octree_test.dir/build.make octree_use/CMakeFiles/octree_test.dir/src/octree_test.cpp.i
+.PHONY : src/octree_test.cpp.i
+
+src/octree_test.s: src/octree_test.cpp.s
+
+.PHONY : src/octree_test.s
+
+# target to generate assembly for a file
+src/octree_test.cpp.s:
+	cd /home/lee_firefly/SceneOcTree/catkin_ll/build && $(MAKE) -f octree_use/CMakeFiles/octree_test.dir/build.make octree_use/CMakeFiles/octree_test.dir/src/octree_test.cpp.s
+.PHONY : src/octree_test.cpp.s
+
 src/sendMaker.o: src/sendMaker.cpp.o
 
 .PHONY : src/sendMaker.o
@@ -464,6 +506,7 @@ help:
 	@echo "... depend"
 	@echo "... install"
 	@echo "... edit_cache"
+	@echo "... octree_test"
 	@echo "... test"
 	@echo "... talker"
 	@echo "... bag2octree"
@@ -486,6 +529,9 @@ help:
 	@echo "... src/bag2octree.o"
 	@echo "... src/bag2octree.i"
 	@echo "... src/bag2octree.s"
+	@echo "... src/octree_test.o"
+	@echo "... src/octree_test.i"
+	@echo "... src/octree_test.s"
 	@echo "... src/sendMaker.o"
 	@echo "... src/sendMaker.i"
 	@echo "... src/sendMaker.s"

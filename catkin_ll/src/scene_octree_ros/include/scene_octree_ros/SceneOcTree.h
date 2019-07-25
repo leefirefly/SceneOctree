@@ -13,6 +13,78 @@
 namespace octomap
 {
 
+class Search
+{
+public:
+  Search()
+  {
+    senderID = -666;
+    receiverID = -666;
+    layerName = "default_string";
+    sceneName = "default_string";
+    swarmID = -666;
+    taskName = "default_string";
+    actorName = "default_string";
+    robotID = -666;
+    dataType = "default_string";
+  }
+  
+  void setSenderID(int _senderID)
+  {
+    senderID = _senderID;
+  }
+
+  void setReceiverID(int _receiverID)
+  {
+    receiverID = _receiverID;
+  }
+
+  void setLayerName(string _layerName)
+  {
+    layerName = _layerName;
+  }
+
+  void setSceneName(string _sceneName)
+  {
+    sceneName = _sceneName;
+  }
+
+  void setSwarmID(int _swarmID)
+  {
+    swarmID = _swarmID;
+  }
+
+  void setTaskName(string _taskName)
+  {
+    taskName = _taskName;
+  }
+
+  void setActorName(string _actorName)
+  {
+    actorName = _actorName;
+  }
+
+  void setRobotID(int _robotID)
+  {
+    robotID = _robotID;
+  }
+
+  void setDataType(string _dataType)
+  {
+    dataType = _dataType;
+  }
+
+  int senderID;
+  int receiverID;
+  string layerName;
+  string sceneName;
+  int swarmID;
+  string taskName;
+  string actorName;
+  int robotID;
+  string dataType;
+};
+
 class SceneOcTree;
 
 // node definition
@@ -154,6 +226,12 @@ public:
   static int readTrees(const std::string &filename, vector<AbstractOcTree *> &treeVecotor);
   static bool readHeader(std::istream &s, std::string &id, unsigned &size, double &res);
   static AbstractOcTree *createTree(const std::string class_name, double res);
+
+  static SceneOcTreeNode *getRobotInfoByRobotId(const int id, const SceneOcTree *tree);
+  static int getRobotOfTreesByRobotId(const int id, const std::string &filename, vector<SceneOcTreeNode *> &nodeVector);
+
+  static SceneOcTree *getRobotInfoBySearch(const Search search, const SceneOcTree *tree);
+  static int getRobotOfTreesBySearch(const Search search, const std::string &filename, vector<SceneOcTree *> &treeVector);
 
 protected:
   void updateInnerOccupancyRecurs(SceneOcTreeNode *node, unsigned int depth);

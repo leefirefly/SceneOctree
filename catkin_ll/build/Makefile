@@ -1518,6 +1518,19 @@ actionlib_generate_messages_lisp/fast:
 .PHONY : actionlib_generate_messages_lisp/fast
 
 #=============================================================================
+# Target rules for targets named octree_test
+
+# Build rule for target.
+octree_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 octree_test
+.PHONY : octree_test
+
+# fast build rule for target.
+octree_test/fast:
+	$(MAKE) -f octree_use/CMakeFiles/octree_test.dir/build.make octree_use/CMakeFiles/octree_test.dir/build
+.PHONY : octree_test/fast
+
+#=============================================================================
 # Target rules for targets named talker
 
 # Build rule for target.
@@ -1816,6 +1829,7 @@ help:
 	@echo "... tf_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_eus"
 	@echo "... actionlib_generate_messages_lisp"
+	@echo "... octree_test"
 	@echo "... talker"
 	@echo "... bag2octree"
 	@echo "... visualization_msgs_generate_messages_py"

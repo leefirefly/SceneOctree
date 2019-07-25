@@ -146,6 +146,7 @@
 /home/lee_firefly/SceneOcTree/catkin_ll/build/scene_octree_ros/CMakeFiles/actionlib_generate_messages_lisp.dir
 /home/lee_firefly/SceneOcTree/catkin_ll/build/octree_use/CMakeFiles/install.dir
 /home/lee_firefly/SceneOcTree/catkin_ll/build/octree_use/CMakeFiles/edit_cache.dir
+/home/lee_firefly/SceneOcTree/catkin_ll/build/octree_use/CMakeFiles/octree_test.dir
 /home/lee_firefly/SceneOcTree/catkin_ll/build/octree_use/CMakeFiles/test.dir
 /home/lee_firefly/SceneOcTree/catkin_ll/build/octree_use/CMakeFiles/talker.dir
 /home/lee_firefly/SceneOcTree/catkin_ll/build/octree_use/CMakeFiles/bag2octree.dir

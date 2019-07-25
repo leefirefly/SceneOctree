@@ -3,128 +3,163 @@
  *useage: test SceneOcTree
  *date: 2019-07-10
  */
-#include <iostream>
-#include <assert.h>
-#include <vector>
-
-
-//octomap
-#include <octomap/octomap.h>
-#include <octomap/ColorOcTree.h>
-#include <octomap/AbstractOcTree.h>
-#include <octomap/math/Pose6D.h>
 
 #include "abstract_msgs/QueryResult.h"
+
+#include <ros/ros.h>
 
 #include "scene_octree_ros/SceneOcTree.h"
 #include "scene_octree_ros/LeafData.h"
 
+#include <octomap/octomap.h>
+#include <octomap/AbstractOcTree.h>
+
+int msg_count;
+int flag;
+abstract_msgs::QueryResult plane_data[5];
+
 using namespace std;
-using namespace octomath;
 using namespace octomap;
+using namespace octomath;
+
+void bagCallback(const abstract_msgs::QueryResult &msg)
+{
+    int planeID = msg.data.robotID;
+    plane_data[planeID - 1] = msg;
+    flag = flag - 1;
+
+    if (msg_count < msg.count && flag == 0)
+    {
+        stringstream ss;
+        ss << "/home/lee_firefly/SceneOcTree/catkin_ll/src/octree_use/data/planePos" << msg_count << ".ot";
+        string filename = ss.str();
+        string TotalFileName = "/home/lee_firefly/SceneOcTree/catkin_ll/src/octree_use/data/planePosALL.ot";
+
+        SceneOcTree tree(0.1);
+        for (int i = 0; i < 5; i++)
+        {
+            float x = plane_data[i].data.robotPose.position.x;
+            float y = plane_data[i].data.robotPose.position.y;
+            float z = plane_data[i].data.robotPose.position.z;
+            tree.updateNode(x, y, z, true);
+            tree.integrateNodeScene(x, y, z, i * 50, i * 25, 255 - i * 50, plane_data[i]);
+        }
+        tree.updateInnerOccupancy();
+
+        tree.write(filename);
+        tree.writeTrees(TotalFileName);
+        cout << "write file::" << filename << endl;
+        cout << "write file::" << TotalFileName << endl;
+
+        flag = 5;
+        msg_count = msg_count + 1;
+
+        // test search by RobotID
+        /* 
+        int searchID = 3;
+        SceneOcTreeNode *nodeById = SceneOcTree::getRobotInfoByRobotId(searchID, &tree);
+        if (nodeById != NULL)
+            cout << "test read Node form a tree by RobotID: " << nodeById->getScene().objectData.query_result.data.robotID << endl;
+        else
+            cout << "test read Node form a tree by RobotID: NULL" << endl;
+
+        vector<SceneOcTreeNode *> nodeV;
+        searchID = 2;
+        int nodeCount = SceneOcTree::getRobotOfTreesByRobotId(searchID, TotalFileName, nodeV);
+        cout << "node Count: " << nodeCount << " nodeV size: " << nodeV.size() << endl;
+        for (vector<SceneOcTreeNode *>::iterator it = nodeV.begin(); it != nodeV.end(); ++it)
+        {
+            cout << "test Read Node by robot ID of Trees: " << (*it)->getScene().objectData.query_result.data.robotID << endl;
+        }
+        nodeV.clear();
+        searchID = 4;
+        nodeCount = SceneOcTree::getRobotOfTreesByRobotId(searchID, TotalFileName, nodeV);
+        cout << "node Count: " << nodeCount << " nodeV size: " << nodeV.size() << endl;
+        for (vector<SceneOcTreeNode *>::iterator it = nodeV.begin(); it != nodeV.end(); ++it)
+        {
+            cout << "test Read Node by robot ID of Trees: " << (*it)->getScene().objectData.query_result.data.robotID << endl;
+        }
+        */
+        // test search by Search
+        Search search;
+        search.setRobotID(1);
+        search.setTaskName("test");
+        SceneOcTree *treeBySearch = SceneOcTree::getRobotInfoBySearch(search, &tree);
+        if (treeBySearch != NULL)
+        {
+            for (SceneOcTree::leaf_iterator it = treeBySearch->begin_leafs(), end = treeBySearch->end_leafs(); it != end; ++it)
+            {
+                SceneOcTreeNode *result = treeBySearch->search(it.getKey());
+                cout << "test search from a tree: " << result->getScene().objectData.query_result << endl;
+            }
+        }
+        else
+        {
+            cout << "search no result!" << endl;
+        }
+
+        vector<SceneOcTree *> treeVofSearch;
+        int treeCount = SceneOcTree::getRobotOfTreesBySearch(search, TotalFileName, treeVofSearch);
+        for (vector<SceneOcTree *>::iterator iter = treeVofSearch.begin(); iter != treeVofSearch.end(); ++iter)
+        {
+            for (SceneOcTree::leaf_iterator it = (*iter)->begin_leafs(), end = (*iter)->end_leafs(); it != end; ++it)
+            {
+                SceneOcTreeNode *result = treeBySearch->search(it.getKey());
+                cout << "test search from a file: " << result->getScene().objectData.query_result << endl;
+            }
+        }
+
+        AbstractOcTree *tree1 = AbstractOcTree::read(filename);
+        cout << "file read to tree1" << endl;
+        if (SceneOcTree *tree2 = dynamic_cast<SceneOcTree *>(tree1))
+        {
+            cout << tree2->getTreeType() << endl;
+            for (SceneOcTree::leaf_iterator it = tree2->begin_leafs(), end = tree2->end_leafs(); it != end; ++it)
+            {
+                SceneOcTreeNode *result = tree2->search(it.getKey());
+                //cout << "test file read, find sceneName::" << result->getScene().objectData.query_result << endl;
+            }
+            cout << "  read tree done" << endl;
+        }
+    }
+    /*
+    if (msg_count == 3)
+    {
+        string TotalFileName = "/home/lee_firefly/SceneOcTree/catkin_ll/src/octree_use/data/planePosALL.ot";
+        vector<AbstractOcTree *> treeV;
+        int treeCount = SceneOcTree::readTrees(TotalFileName, treeV);
+        cout << "read trees, number of trees is: " << treeCount << "treeV size:" << treeV.size() << endl;
+        for (vector<AbstractOcTree *>::iterator it = treeV.begin(); it != treeV.end(); ++it)
+        {
+            cout << "read tree form vec: " << endl;
+            if (SceneOcTree *treeformV = dynamic_cast<SceneOcTree *>(*it))
+            {
+                for (SceneOcTree::leaf_iterator it = treeformV->begin_leafs(), end = treeformV->end_leafs(); it != end; ++it)
+                {
+                    SceneOcTreeNode *result = treeformV->search(it.getKey());
+                    //cout << "test file read, data: r " << (unsigned int)result_scene.r << " g " << (unsigned int)result_scene.g << " b " << (unsigned int)result_scene.b << endl;
+                    abstract_msgs::QueryResult test_QueryResult = result->getScene().objectData.query_result;
+                    abstract_msgs::UnifiedData test_UnifiedData = test_QueryResult.data;
+                    string test_sceneName = test_QueryResult.sceneName;
+                    string test_taskName = test_UnifiedData.taskName;
+                    cout << "test iterator, find node::"
+                         << " r: " << (unsigned int)result->getScene().r << " sceneName: " << test_sceneName << " taskName: " << test_taskName << endl;
+                }
+                cout << treeformV->getTreeType();
+                cout << "  read tree done" << endl;
+            }
+        }
+    }
+    */
+}
 
 int main(int argc, char **argv)
 {
-    abstract_msgs::QueryResult LeafData;
-    LeafData.count = 1;
-    LeafData.layerName;
-    int32_t swarmID = 1;
-    string taskName = "test";
-    string actorName = "test";
-    int32_t robotID = 1;
-    string timeStamp = "test";
-    Pose6D robotPose(0, 1, 2, 3, 4, 5);
-    Pose6D sensorPose(5, 4, 3, 2, 1, 0);
-    string dataType = "test";
-    uint8_t data[5] = {1,2,3,4,5};
-    LeafData testLeafData1(swarmID, taskName, actorName, robotID, timeStamp, robotPose, sensorPose, dataType, data);
-    LeafData testLeafData2 = testLeafData1;
-    cout << "test LeafData::" << testLeafData1 << endl;
-    printf("test data:: %d\n",testLeafData1.data[2]);
-
-    float pos1[3] = {0.1, 0.2, 0.3};
-    point3d pp1(pos1[0], pos1[1], pos1[2]);
-    SceneOcTree test_tree(0.01);
-    test_tree.updateNode(pp1, true);
-    test_tree.integrateNodeScene(pos1[0], pos1[1], pos1[2], 200, 200, 100, testLeafData1);
-
-    float pos2[3] = {0.3, 0.2, 0.1};
-    point3d pp2(pos2[0], pos2[1], pos2[2]);
-    test_tree.updateNode(pp2, true);
-    test_tree.integrateNodeScene(pos2[0], pos2[1], pos2[2], 200, 200, 100, testLeafData2);
-
-    point3d query(0.1, 0.2, 0.3);
-    SceneOcTreeNode *result = test_tree.search(query);
-    cout << "find node1::" << result->getScene() << endl;
-
-    query = point3d(0.3, 0.2, 0.1);
-    result = test_tree.search(query);
-    cout << "find node2::" << result->getScene() << endl;
-
-    //test_tree.integrateNodeScene(pp,200,200,100,testLeafData);
-    cout << "tree created done" << endl;
-    //string output_file = "/home/lee_firefly/octomap/test.ot";
-    string output_file1 = argv[1];
-    //test_tree.updateInnerOccupancy();
-    cout << "write in:" << output_file1 << endl;
-    // 存储octomap, 注意要存成.ot文件而非.bt文件
-    test_tree.write(output_file1);
-    cout << "tree written done" << endl;
-    AbstractOcTree *tree1 = AbstractOcTree::read(output_file1);
-    if (SceneOcTree *tree2 = dynamic_cast<SceneOcTree *>(tree1))
-    {
-        string output_file2 = argv[2];
-        tree2->write(output_file2);
-        cout << "tree2 done" << endl;
-
-        query = point3d(0.1, 0.2, 0.3);
-        result = tree2->search(query);
-        cout << "find node1::" << result->getScene() << endl;
-
-        query = point3d(0.3, 0.2, 0.1);
-        result = tree2->search(query);
-        cout << "find node2::" << result->getScene() << endl;
-    }
-
-    /*
-    string input_file = argv[1], output_file = argv[2];
-    pcl::PointCloud<pcl::PointXYZRGBA> cloud;
-    pcl::io::loadPCDFile<pcl::PointXYZRGBA>(input_file, cloud);
-
-    cout << "point cloud loaded, piont size = " << cloud.points.size() << endl;
-
-    //声明octomap变量
-    cout << "copy data into octomap..." << endl;
-    // 创建带颜色的八叉树对象，参数为分辨率，这里设成了0.05
-    //octomap::SceneOcTree tree( 0.05 );
-    octomap::ColorOcTree tree(0.05);
-
-    for (auto p : cloud.points)
-    {
-        // 将点云里的点插入到octomap中
-        tree.updateNode(octomap::point3d(p.x, p.y, p.z), true);
-    }
-
-    // 设置颜色
-    for (auto p : cloud.points)
-    {
-        //tree.integrateNodeScene( p.x, p.y, p.z, p.r, p.g, p.b );
-        tree.integrateNodeColor(p.x, p.y, p.z, p.r, p.g, p.b);
-    }
-
-    // 更新octomap
-    tree.updateInnerOccupancy();
-    // 存储octomap, 注意要存成.ot文件而非.bt文件
-    tree.write(output_file);
-    cout << "done." << endl;
-
-    octomap::AbstractOcTree *tree1 = octomap::AbstractOcTree::read(output_file);
-    if (octomap::ColorOcTree *tree2 = dynamic_cast<octomap::ColorOcTree *>(tree1))
-    {
-        string output_file2 = argv[3];
-        tree2->write(output_file2);
-        cout<<"tree2 done"<<endl;
-    }
-*/
+    flag = 5;
+    ros::init(argc, argv, "bag2octree");
+    ros::NodeHandle n;
+    const std::string topic_name = "GroudStationScene";
+    ros::Subscriber sub = n.subscribe(topic_name, 1000, bagCallback);
+    ros::spin();
     return 0;
 }
