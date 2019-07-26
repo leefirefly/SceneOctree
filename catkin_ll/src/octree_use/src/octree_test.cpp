@@ -13,6 +13,7 @@
 
 #include <octomap/octomap.h>
 #include <octomap/AbstractOcTree.h>
+#include "scene_octree_ros/rvizShow.h"
 
 int msg_count;
 int flag;
@@ -52,9 +53,12 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
         cout << "write file::" << filename << endl;
         cout << "write file::" << TotalFileName << endl;
 
+        SceneOcTreeMarker octreeRvizShow;
+        octreeRvizShow.showSingleTree(&tree);
+
         flag = 5;
         msg_count = msg_count + 1;
-    
+    /*
         SceneOcTree* searchByBox = SceneOcTree::getRobotInfoByBox(43,45,-98,-96,-68,-65,&tree);
         if(searchByBox != NULL)
         {
@@ -68,7 +72,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
         {
             cout << "no target in the box!!!"<<endl;
         }
-        
+      */  
 
         // test search by RobotID
         /* 

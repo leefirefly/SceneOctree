@@ -19,6 +19,7 @@
 
 #include "scene_octree_ros/SceneOcTree.h"
 #include "scene_octree_ros/LeafData.h"
+#include "scene_octree_ros/rvizShow.h"
 
 #include <sstream>
 
@@ -90,7 +91,7 @@ void publishMesh(
     marker.color.b = b;
     marker.color.a = 1.0;
     marker.frame_locked = true;
-    marker.mesh_resource = "package://beginner_tutorials/meshes/plane.stl";
+    marker.mesh_resource = "package://scene_octree_ros/meshes/plane.stl";
     marker.mesh_use_embedded_materials = use_embedded_materials;
     marker.id = id;
     g_marker_pub.publish(marker);
@@ -106,6 +107,9 @@ void publishMeshes()
     AbstractOcTree *tree1 = AbstractOcTree::read(filename);
     if (SceneOcTree *tree2 = dynamic_cast<SceneOcTree *>(tree1))
     {
+        //SceneOcTreeMarker testR;
+        
+        //testR.showSingleTree(tree2);
         for (SceneOcTree::leaf_iterator it = tree2->begin_leafs(), end = tree2->end_leafs(); it != end; ++it)
         {
             SceneOcTreeNode *result = tree2->search(it.getKey());
@@ -133,7 +137,7 @@ void publishMeshes()
             //float colorR = 0.5;
             //float colorG = 0.5;
             //float colorB = 0;
-            cout << "id: "<< id << "  posX: "<< posX <<"  posZ: "<< posZ <<"  posY: "<< posY << " oriX: "<<oriX<<" oriY: "<<oriY<<" oriZ: "<<oriZ<< " colorR: "<<colorR<<endl; 
+            //cout << "id: "<< id << "  posX: "<< posX <<"  posZ: "<< posZ <<"  posY: "<< posY << " oriX: "<<oriX<<" oriY: "<<oriY<<" oriZ: "<<oriZ<< " colorR: "<<colorR<<endl; 
             publishMesh(id, posX, posY, posZ, oriX, oriY, oriZ, oriW, colorR, colorG, colorB, true);
             publishText(id, posX, posY, posZ, oriX, oriY, oriZ, oriW, colorR, colorG, colorB,robotInfo);
         }

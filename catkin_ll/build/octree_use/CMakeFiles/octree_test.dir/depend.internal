@@ -7,9 +7,11 @@ octree_use/CMakeFiles/octree_test.dir/src/octree_test.cpp.o
  /home/lee_firefly/SceneOcTree/catkin_ll/src/octree_use/src/octree_test.cpp
  /home/lee_firefly/SceneOcTree/catkin_ll/src/scene_octree_ros/include/scene_octree_ros/LeafData.h
  /home/lee_firefly/SceneOcTree/catkin_ll/src/scene_octree_ros/include/scene_octree_ros/SceneOcTree.h
+ /home/lee_firefly/SceneOcTree/catkin_ll/src/scene_octree_ros/include/scene_octree_ros/rvizShow.h
  /opt/ros/kinetic/include/geometry_msgs/Point.h
  /opt/ros/kinetic/include/geometry_msgs/Pose.h
  /opt/ros/kinetic/include/geometry_msgs/Quaternion.h
+ /opt/ros/kinetic/include/geometry_msgs/Vector3.h
  /opt/ros/kinetic/include/octomap/AbstractOcTree.h
  /opt/ros/kinetic/include/octomap/AbstractOccupancyOcTree.h
  /opt/ros/kinetic/include/octomap/MCTables.h
@@ -88,5 +90,8 @@ octree_use/CMakeFiles/octree_test.dir/src/octree_test.cpp.o
  /opt/ros/kinetic/include/ros/wall_timer.h
  /opt/ros/kinetic/include/ros/wall_timer_options.h
  /opt/ros/kinetic/include/rosconsole/macros_generated.h
+ /opt/ros/kinetic/include/std_msgs/ColorRGBA.h
+ /opt/ros/kinetic/include/std_msgs/Header.h
+ /opt/ros/kinetic/include/visualization_msgs/Marker.h
  /opt/ros/kinetic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/kinetic/include/xmlrpcpp/XmlRpcValue.h
