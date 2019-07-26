@@ -41,6 +41,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
             float x = plane_data[i].data.robotPose.position.x;
             float y = plane_data[i].data.robotPose.position.y;
             float z = plane_data[i].data.robotPose.position.z;
+            cout << "x y z: "<<x <<" "<<y<<" "<<z <<endl;
             tree.updateNode(x, y, z, true);
             tree.integrateNodeScene(x, y, z, i * 50, i * 25, 255 - i * 50, plane_data[i]);
         }
@@ -53,6 +54,21 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
 
         flag = 5;
         msg_count = msg_count + 1;
+    
+        SceneOcTree* searchByBox = SceneOcTree::getRobotInfoByBox(43,45,-98,-96,-68,-65,&tree);
+        if(searchByBox != NULL)
+        {
+            for (SceneOcTree::leaf_iterator it = searchByBox->begin_leafs(), end = searchByBox->end_leafs(); it != end; ++it)
+            {
+                SceneOcTreeNode *result = searchByBox->search(it.getKey());
+                cout << "test search from a tree: " << result->getScene().objectData.query_result << endl;
+            }          
+        }
+        else
+        {
+            cout << "no target in the box!!!"<<endl;
+        }
+        
 
         // test search by RobotID
         /* 
@@ -79,7 +95,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
         {
             cout << "test Read Node by robot ID of Trees: " << (*it)->getScene().objectData.query_result.data.robotID << endl;
         }
-        */
+        
         // test search by Search
         Search search;
         search.setRobotID(1);
@@ -108,7 +124,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
                 cout << "test search from a file: " << result->getScene().objectData.query_result << endl;
             }
         }
-
+        */
         AbstractOcTree *tree1 = AbstractOcTree::read(filename);
         cout << "file read to tree1" << endl;
         if (SceneOcTree *tree2 = dynamic_cast<SceneOcTree *>(tree1))

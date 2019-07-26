@@ -107,7 +107,7 @@ int SceneOcTree::readTrees(const std::string &filename, vector<AbstractOcTree *>
         if (size > 0)
           tree->readData(file);
         //cout << "tree size: " << tree->size() << endl;
-      //  OCTOMAP_DEBUG_STR("Done (" << tree->size() << " nodes)");
+        //  OCTOMAP_DEBUG_STR("Done (" << tree->size() << " nodes)");
       }
 
       treeVecotor.push_back(tree);
@@ -255,13 +255,13 @@ int SceneOcTree::getRobotOfTreesByRobotId(const int id, const std::string &filen
   int count = 0;
   vector<AbstractOcTree *> treeV;
   int treeCount = SceneOcTree::readTrees(filename, treeV);
-  cout <<"treeCount  "<< treeCount<<endl;
+  cout << "treeCount  " << treeCount << endl;
   for (vector<AbstractOcTree *>::iterator it = treeV.begin(); it != treeV.end(); ++it)
   {
     if (SceneOcTree *treefromV = dynamic_cast<SceneOcTree *>(*it))
     {
-      SceneOcTreeNode* result = SceneOcTree::getRobotInfoByRobotId(id,treefromV);
-      if(result != NULL)
+      SceneOcTreeNode *result = SceneOcTree::getRobotInfoByRobotId(id, treefromV);
+      if (result != NULL)
       {
         nodeVector.push_back(result);
         count = count + 1;
@@ -271,7 +271,7 @@ int SceneOcTree::getRobotOfTreesByRobotId(const int id, const std::string &filen
   return count;
 }
 
-SceneOcTree* SceneOcTree::getRobotInfoBySearch(const Search search, const SceneOcTree *tree)
+SceneOcTree *SceneOcTree::getRobotInfoBySearch(const Search search, const SceneOcTree *tree)
 {
   int count = 0;
   SceneOcTree *newTree = tree->create();
@@ -279,85 +279,103 @@ SceneOcTree* SceneOcTree::getRobotInfoBySearch(const Search search, const SceneO
   {
     int flag = 2;
     SceneOcTreeNode *result = tree->search(it.getKey());
-    if(search.actorName != "default_string")
+    if (search.actorName != "default_string")
     {
-      if (result->getScene().objectData.query_result.data.actorName == search.actorName){
+      if (result->getScene().objectData.query_result.data.actorName == search.actorName)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.dataType != "default_string" && flag !=0 )
+    if (search.dataType != "default_string" && flag != 0)
     {
-      if (result->getScene().objectData.query_result.data.dataType == search.dataType){
+      if (result->getScene().objectData.query_result.data.dataType == search.dataType)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.layerName != "default_string" && flag !=0 )
+    if (search.layerName != "default_string" && flag != 0)
     {
-      if (result->getScene().objectData.query_result.layerName == search.layerName){
+      if (result->getScene().objectData.query_result.layerName == search.layerName)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.receiverID != -666 && flag !=0 )
+    if (search.receiverID != -666 && flag != 0)
     {
-      if (result->getScene().objectData.query_result.receiverID == search.receiverID){
+      if (result->getScene().objectData.query_result.receiverID == search.receiverID)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.robotID != -666 && flag !=0 )
+    if (search.robotID != -666 && flag != 0)
     {
-      if (result->getScene().objectData.query_result.data.robotID == search.robotID){
+      if (result->getScene().objectData.query_result.data.robotID == search.robotID)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.sceneName != "default_string" && flag !=0 )
+    if (search.sceneName != "default_string" && flag != 0)
     {
-      if (result->getScene().objectData.query_result.sceneName == search.sceneName){
+      if (result->getScene().objectData.query_result.sceneName == search.sceneName)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.senderID != -666 && flag !=0 )
+    if (search.senderID != -666 && flag != 0)
     {
-      if (result->getScene().objectData.query_result.senderID == search.senderID){
+      if (result->getScene().objectData.query_result.senderID == search.senderID)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.swarmID != -666 && flag !=0 )
+    if (search.swarmID != -666 && flag != 0)
     {
-      if (result->getScene().objectData.query_result.data.swarmID == search.swarmID){
+      if (result->getScene().objectData.query_result.data.swarmID == search.swarmID)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(search.taskName != "default_string" && flag !=0 )
+    if (search.taskName != "default_string" && flag != 0)
     {
-      if (result->getScene().objectData.query_result.data.taskName == search.taskName){
+      if (result->getScene().objectData.query_result.data.taskName == search.taskName)
+      {
         flag = 1;
       }
-      else flag = 0;
+      else
+        flag = 0;
     }
-    if(flag == 2)
+    if (flag == 2)
     {
       return NULL;
       break;
     }
-    if(flag == 1)
+    if (flag == 1)
     {
       count = count + 1;
       float x = result->getScene().objectData.query_result.data.robotPose.position.x;
       float y = result->getScene().objectData.query_result.data.robotPose.position.y;
       float z = result->getScene().objectData.query_result.data.robotPose.position.z;
-      newTree->updateNode(x,y,z,true);
-      newTree->integrateNodeScene(x,y,z,result->getScene().r,result->getScene().g,result->getScene().b,result->getScene().objectData);
+      newTree->updateNode(x, y, z, true);
+      newTree->integrateNodeScene(x, y, z, result->getScene().r, result->getScene().g, result->getScene().b, result->getScene().objectData);
     }
   }
-  if(count > 0)
+  if (count > 0)
   {
     return newTree;
   }
@@ -366,7 +384,7 @@ SceneOcTree* SceneOcTree::getRobotInfoBySearch(const Search search, const SceneO
     return NULL;
   }
 }
-int SceneOcTree::getRobotOfTreesBySearch(const Search search, const std::string &filename, vector<SceneOcTree*> &treeVector)
+int SceneOcTree::getRobotOfTreesBySearch(const Search search, const std::string &filename, vector<SceneOcTree *> &treeVector)
 {
   int count = 0;
   vector<AbstractOcTree *> treeV;
@@ -376,15 +394,85 @@ int SceneOcTree::getRobotOfTreesBySearch(const Search search, const std::string 
   {
     if (SceneOcTree *treefromV = dynamic_cast<SceneOcTree *>(*it))
     {
-      SceneOcTree* result = SceneOcTree::getRobotInfoBySearch(search,treefromV);
-      if(result != NULL)
+      SceneOcTree *result = SceneOcTree::getRobotInfoBySearch(search, treefromV);
+      if (result != NULL)
       {
         treeVector.push_back(result);
         count = count + 1;
       }
     }
   }
-  return count;  
+  return count;
+}
+
+SceneOcTree *SceneOcTree::getRobotInfoByBox(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax, const SceneOcTree *tree)
+{
+  int flag = 0;
+  SceneOcTree *newTree = tree->create();
+  //Since the number of nodes is small, we directly traverse the whole tree
+  for (SceneOcTree::leaf_iterator it = tree->begin_leafs(), end = tree->end_leafs(); it != end; ++it)
+  {
+    SceneOcTreeNode *result = tree->search(it.getKey());
+    float x = result->getScene().objectData.query_result.data.robotPose.position.x;
+    float y = result->getScene().objectData.query_result.data.robotPose.position.y;
+    float z = result->getScene().objectData.query_result.data.robotPose.position.z;
+    if(x>=xMin && x<=xMax && y>=yMin && y<=yMax && z>=zMin && z<=zMax)
+    {
+      flag = 1;
+      newTree->updateNode(x,y,z,true);
+      newTree->integrateNodeScene(x,y,z,result->getScene().r,result->getScene().g,result->getScene().b,result->getScene().objectData);      
+    }
+  }
+  if(flag == 0)
+  {
+    return NULL;
+  }
+  else
+  {
+    return newTree;
+  }
+  //this method is too foolish(runtime is too long, because it's O(n^3))
+  /*
+  float res = tree->getResolution();
+  cout << "res: "<< res <<endl;
+  unsigned int steps[3];
+  steps[0] = floor((xMax - xMin)/res);
+  steps[1] = floor((yMax - yMin)/res);
+  steps[2] = floor((zMax - zMin)/res);
+  float xx = xMin;
+  float yy = yMin;
+  float zz = zMin;
+  for (unsigned int x = 0; x < steps[0]; ++x)
+  {
+    xx += res;
+    for (unsigned int y = 0; y < steps[1]; ++y)
+    {
+      yy += res;
+      for (unsigned int z = 0; z < steps[2]; ++z)
+      {
+        //          std::cout << "querying p=" << p << std::endl;
+        zz += res;
+        SceneOcTreeNode* node = tree->search(xx,yy,zz);
+        if (node != NULL)
+        {
+          flag = 1;
+          newTree->updateNode(xx,yy,zz,true);
+          newTree->integrateNodeScene(xx,yy,zz,node->getScene().r,node->getScene().g,node->getScene().b,node->getScene().objectData);
+        }
+      }
+      zz = zMin;
+    }
+    yy = yMin;
+  }
+  if(flag == 0)
+  {
+    return NULL;
+  }
+  else
+  {
+    return newTree;
+  }
+  */
 }
 
 /* 

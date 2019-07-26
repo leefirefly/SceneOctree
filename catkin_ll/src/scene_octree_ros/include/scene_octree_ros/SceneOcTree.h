@@ -233,6 +233,8 @@ public:
   static SceneOcTree *getRobotInfoBySearch(const Search search, const SceneOcTree *tree);
   static int getRobotOfTreesBySearch(const Search search, const std::string &filename, vector<SceneOcTree *> &treeVector);
 
+  static SceneOcTree *getRobotInfoByBox(float xMin,float xMax, float yMin, float yMax,float zMin, float zMax, const SceneOcTree *tree);
+
 protected:
   void updateInnerOccupancyRecurs(SceneOcTreeNode *node, unsigned int depth);
 
