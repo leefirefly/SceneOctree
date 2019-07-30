@@ -48,6 +48,7 @@
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/math/CMakeFiles/edit_cache.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/math/CMakeFiles/package.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/test.dir
+/home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/edit_cache.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/compare_octrees.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/eval_octree_accuracy.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/bt2vrml.dir
@@ -64,13 +65,13 @@
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/log2graph.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/pcd2SceneOctomap.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/install/local.dir
+/home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/testRead.dir
+/home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/intersection_example.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/normals_example.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/install.dir
-/home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/intersection_example.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/binvox2bt.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/octree2pointcloud.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/rebuild_cache.dir
-/home/lee_firefly/SceneOcTree/octomap/octomap/build/src/CMakeFiles/edit_cache.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/testing/CMakeFiles/package.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/testing/CMakeFiles/edit_cache.dir
 /home/lee_firefly/SceneOcTree/octomap/octomap/build/src/testing/CMakeFiles/package_source.dir

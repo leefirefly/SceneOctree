@@ -69,8 +69,11 @@ TARGET_LINK_LIBRARIES(simple_example octomap)
 
 ADD_EXECUTABLE(pcd2SceneOctomap pcd2SceneOctomap.cpp)
 TARGET_LINK_LIBRARIES(pcd2SceneOctomap octomap
-    ${PCL_LIBRARIES}
     ${OCTOMAP_LIBRARIES})
+
+ADD_EXECUTABLE(testRead testRead.cpp)
+TARGET_LINK_LIBRARIES(testRead octomap
+        ${OCTOMAP_LIBRARIES})
 
 ADD_EXECUTABLE(normals_example normals_example.cpp)
 TARGET_LINK_LIBRARIES(normals_example octomap)

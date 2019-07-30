@@ -52,6 +52,7 @@ namespace octomap {
      } else {
        // TODO: check is_good of finished stream, return
        write(file);
+       file.flush();
        file.close();
      }
 
@@ -74,7 +75,6 @@ namespace octomap {
 
   AbstractOcTree* AbstractOcTree::read(const std::string& filename){
     std::ifstream file(filename.c_str(), std::ios_base::in |std::ios_base::binary);
-
     if (!file.is_open()){
       OCTOMAP_ERROR_STR("Filestream to "<< filename << " not open, nothing read.");
       return NULL;

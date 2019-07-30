@@ -236,7 +236,7 @@ octomap/octomap_deprecated.h
 math.h
 -
 
-/home/lee_firefly/SceneOcTree/octomap/octomap/src/pcd2SceneOctomap.cpp
+/home/lee_firefly/SceneOcTree/octomap/octomap/src/testRead.cpp
 iostream
 -
 assert.h

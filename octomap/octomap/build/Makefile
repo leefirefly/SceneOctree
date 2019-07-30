@@ -734,17 +734,17 @@ pcd2SceneOctomap/fast:
 .PHONY : pcd2SceneOctomap/fast
 
 #=============================================================================
-# Target rules for targets named normals_example
+# Target rules for targets named testRead
 
 # Build rule for target.
-normals_example: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 normals_example
-.PHONY : normals_example
+testRead: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testRead
+.PHONY : testRead
 
 # fast build rule for target.
-normals_example/fast:
-	$(MAKE) -f src/CMakeFiles/normals_example.dir/build.make src/CMakeFiles/normals_example.dir/build
-.PHONY : normals_example/fast
+testRead/fast:
+	$(MAKE) -f src/CMakeFiles/testRead.dir/build.make src/CMakeFiles/testRead.dir/build
+.PHONY : testRead/fast
 
 #=============================================================================
 # Target rules for targets named intersection_example
@@ -758,6 +758,19 @@ intersection_example: cmake_check_build_system
 intersection_example/fast:
 	$(MAKE) -f src/CMakeFiles/intersection_example.dir/build.make src/CMakeFiles/intersection_example.dir/build
 .PHONY : intersection_example/fast
+
+#=============================================================================
+# Target rules for targets named normals_example
+
+# Build rule for target.
+normals_example: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 normals_example
+.PHONY : normals_example
+
+# fast build rule for target.
+normals_example/fast:
+	$(MAKE) -f src/CMakeFiles/normals_example.dir/build.make src/CMakeFiles/normals_example.dir/build
+.PHONY : normals_example/fast
 
 #=============================================================================
 # Target rules for targets named binvox2bt
@@ -972,8 +985,9 @@ help:
 	@echo "... simple_example"
 	@echo "... log2graph"
 	@echo "... pcd2SceneOctomap"
-	@echo "... normals_example"
+	@echo "... testRead"
 	@echo "... intersection_example"
+	@echo "... normals_example"
 	@echo "... binvox2bt"
 	@echo "... octree2pointcloud"
 	@echo "... test_changedkeys"

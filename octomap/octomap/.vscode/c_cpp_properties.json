@@ -7,11 +7,42 @@
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
+            "knownCompilers": [
+                {
+                    "path": "/usr/bin/gcc",
+                    "isC": true
+                },
+                {
+                    "path": "/usr/bin/g++",
+                    "isC": false
+                },
+                {
+                    "path": "/usr/bin/cpp",
+                    "isC": false
+                },
+                {
+                    "path": "/usr/bin/gcc-5",
+                    "isC": true
+                },
+                {
+                    "path": "/usr/bin/g++-5",
+                    "isC": false
+                },
+                {
+                    "path": "/usr/bin/gcc",
+                    "isC": false
+                }
+            ],
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64",
-            "configurationProvider": "vector-of-bool.cmake-tools",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4

@@ -67,6 +67,17 @@ test/fast: test
 
 .PHONY : test/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
@@ -143,17 +154,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -353,19 +353,19 @@ pcd2SceneOctomap/fast:
 .PHONY : pcd2SceneOctomap/fast
 
 # Convenience name for target.
-src/CMakeFiles/normals_example.dir/rule:
-	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/normals_example.dir/rule
-.PHONY : src/CMakeFiles/normals_example.dir/rule
+src/CMakeFiles/testRead.dir/rule:
+	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/testRead.dir/rule
+.PHONY : src/CMakeFiles/testRead.dir/rule
 
 # Convenience name for target.
-normals_example: src/CMakeFiles/normals_example.dir/rule
+testRead: src/CMakeFiles/testRead.dir/rule
 
-.PHONY : normals_example
+.PHONY : testRead
 
 # fast build rule for target.
-normals_example/fast:
-	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/normals_example.dir/build.make src/CMakeFiles/normals_example.dir/build
-.PHONY : normals_example/fast
+testRead/fast:
+	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/testRead.dir/build.make src/CMakeFiles/testRead.dir/build
+.PHONY : testRead/fast
 
 # Convenience name for target.
 src/CMakeFiles/intersection_example.dir/rule:
@@ -381,6 +381,21 @@ intersection_example: src/CMakeFiles/intersection_example.dir/rule
 intersection_example/fast:
 	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/intersection_example.dir/build.make src/CMakeFiles/intersection_example.dir/build
 .PHONY : intersection_example/fast
+
+# Convenience name for target.
+src/CMakeFiles/normals_example.dir/rule:
+	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/normals_example.dir/rule
+.PHONY : src/CMakeFiles/normals_example.dir/rule
+
+# Convenience name for target.
+normals_example: src/CMakeFiles/normals_example.dir/rule
+
+.PHONY : normals_example
+
+# fast build rule for target.
+normals_example/fast:
+	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/normals_example.dir/build.make src/CMakeFiles/normals_example.dir/build
+.PHONY : normals_example/fast
 
 # Convenience name for target.
 src/CMakeFiles/binvox2bt.dir/rule:
@@ -1063,6 +1078,33 @@ simple_example.cpp.s:
 	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/simple_example.dir/build.make src/CMakeFiles/simple_example.dir/simple_example.cpp.s
 .PHONY : simple_example.cpp.s
 
+testRead.o: testRead.cpp.o
+
+.PHONY : testRead.o
+
+# target to build an object file
+testRead.cpp.o:
+	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/testRead.dir/build.make src/CMakeFiles/testRead.dir/testRead.cpp.o
+.PHONY : testRead.cpp.o
+
+testRead.i: testRead.cpp.i
+
+.PHONY : testRead.i
+
+# target to preprocess a source file
+testRead.cpp.i:
+	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/testRead.dir/build.make src/CMakeFiles/testRead.dir/testRead.cpp.i
+.PHONY : testRead.cpp.i
+
+testRead.s: testRead.cpp.s
+
+.PHONY : testRead.s
+
+# target to generate assembly for a file
+testRead.cpp.s:
+	cd /home/lee_firefly/SceneOcTree/octomap/octomap/build && $(MAKE) -f src/CMakeFiles/testRead.dir/build.make src/CMakeFiles/testRead.dir/testRead.cpp.s
+.PHONY : testRead.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1070,6 +1112,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... test"
+	@echo "... edit_cache"
 	@echo "... compare_octrees"
 	@echo "... eval_octree_accuracy"
 	@echo "... bt2vrml"
@@ -1086,13 +1129,13 @@ help:
 	@echo "... log2graph"
 	@echo "... pcd2SceneOctomap"
 	@echo "... install/local"
+	@echo "... testRead"
+	@echo "... intersection_example"
 	@echo "... normals_example"
 	@echo "... install"
-	@echo "... intersection_example"
 	@echo "... binvox2bt"
 	@echo "... octree2pointcloud"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... AbstractOcTree.o"
 	@echo "... AbstractOcTree.i"
 	@echo "... AbstractOcTree.s"
@@ -1162,6 +1205,9 @@ help:
 	@echo "... simple_example.o"
 	@echo "... simple_example.i"
 	@echo "... simple_example.s"
+	@echo "... testRead.o"
+	@echo "... testRead.i"
+	@echo "... testRead.s"
 .PHONY : help
 
 
