@@ -49,7 +49,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
 		}
 		tree.updateInnerOccupancy();
 		tree.write(filename);
-		//tree.writeTrees(TotalFileName);
+		tree.writeTrees(TotalFileName);
 		cout << "write file::" << filename << endl;
 		//cout << "write file::" << TotalFileName << endl;
 		/*
@@ -80,7 +80,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
 			result = tree.search(it.getKey());
 			cout << "test iterator, find node::" << result->getScene().objectData.query_result.data.taskName << endl;
 		}
-		*/
+		
 		//test: read file and convert
 		
 	    //filename = "/home/lee_firefly/catkin_ws/data/planePos2.ot";
@@ -114,6 +114,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
 			}
 			cout << "  read tree done" << endl;
 		}
+		*/
 	}
 	/* 
 	if (msg_count == 3)

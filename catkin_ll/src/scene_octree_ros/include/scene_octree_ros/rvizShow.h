@@ -23,13 +23,13 @@ public:
     {
         frame_id = "/base_link";
         topic_name = "octree_markers";
-        Octree_Marker_pub = n.advertise<visualization_msgs::Marker>("octree_markers", 0);
+        Octree_Marker_pub = n.advertise<visualization_msgs::Marker>("octree_markers", 10);
     }
     SceneOcTreeMarker(string _topic_name, string _frame_id)
     {
         frame_id = _frame_id;
         topic_name = _topic_name;
-        Octree_Marker_pub = n.advertise<visualization_msgs::Marker>(topic_name, 0);
+        Octree_Marker_pub = n.advertise<visualization_msgs::Marker>(topic_name, 10);
     }
 
     void showSingleTree(SceneOcTree *tree)
@@ -78,6 +78,7 @@ public:
     {
         vector<SceneOcTreeNode *> nodeV;
         int nodeCount = SceneOcTree::getRobotOfTreesByRobotId(id, filename, nodeV);
+        //cout << "nodeCount: "<< nodeCount<<endl;
         if (nodeCount > 0)
         {
             for (vector<SceneOcTreeNode *>::iterator it = nodeV.begin(); it != nodeV.end(); ++it)
@@ -95,8 +96,10 @@ public:
                 float colorG = ((unsigned int)result->getScene().g) / 255.0;
                 float colorB = ((unsigned int)result->getScene().b) / 255.0;
                 stringstream ss;
-                string taskName = result->getScene().objectData.query_result.data.taskName;
-                string actorName = result->getScene().objectData.query_result.data.actorName;
+                //string taskName = result->getScene().objectData.query_result.data.taskName;
+                //string actorName = result->getScene().objectData.query_result.data.actorName;
+                string taskName = "test";
+                string actorName = "test";
                 ss << "robotID: " << id << "  actorName: " << actorName << "  taskName: " << taskName;
                 string robotInfo = ss.str();
                 cout << "id: " << id << "  posX: " << posX << "  posZ: " << posZ << "  posY: " << posY << " oriX: " << oriX << " oriY: " << oriY << " oriZ: " << oriZ << " colorR: " << colorR << endl;
@@ -168,6 +171,7 @@ public:
         marker.color.g = 0;
         marker.color.b = 0;
         marker.color.a = 1.0;
+        marker.lifetime = ros::Duration(0.5);
 
         Octree_Marker_pub.publish(marker);
     }
@@ -184,8 +188,8 @@ public:
         marker.header.frame_id = frame_id;
         marker.header.stamp = ros::Time::now();
         marker.ns = "mesh";
-        marker.type = Marker::MESH_RESOURCE;
-        marker.action = Marker::ADD;
+        marker.type =  visualization_msgs::Marker::MESH_RESOURCE;
+        marker.action =  visualization_msgs::Marker::ADD;
         marker.pose.position.x = x / 10;
         marker.pose.position.y = y / 10;
         marker.pose.position.z = z / 10;
@@ -204,6 +208,8 @@ public:
         marker.mesh_resource = "package://scene_octree_ros/meshes/plane.stl";
         marker.mesh_use_embedded_materials = use_embedded_materials;
         marker.id = id;
+        marker.lifetime = ros::Duration();
+
         Octree_Marker_pub.publish(marker);
     }
 

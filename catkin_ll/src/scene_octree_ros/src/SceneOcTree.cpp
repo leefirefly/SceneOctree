@@ -255,7 +255,7 @@ int SceneOcTree::getRobotOfTreesByRobotId(const int id, const std::string &filen
   int count = 0;
   vector<AbstractOcTree *> treeV;
   int treeCount = SceneOcTree::readTrees(filename, treeV);
-  cout << "treeCount  " << treeCount << endl;
+  //cout << "treeCount  " << treeCount << endl;
   for (vector<AbstractOcTree *>::iterator it = treeV.begin(); it != treeV.end(); ++it)
   {
     if (SceneOcTree *treefromV = dynamic_cast<SceneOcTree *>(*it))
