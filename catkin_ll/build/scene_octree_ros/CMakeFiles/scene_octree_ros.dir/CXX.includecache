@@ -57,6 +57,8 @@ string
 -
 abstract_msgs/QueryResult.h
 /home/lee_firefly/SceneOcTree/catkin_ll/src/scene_octree_ros/include/scene_octree_ros/abstract_msgs/QueryResult.h
+geometry_msgs/Pose.h
+/home/lee_firefly/SceneOcTree/catkin_ll/src/scene_octree_ros/include/scene_octree_ros/geometry_msgs/Pose.h
 
 /home/lee_firefly/SceneOcTree/catkin_ll/src/scene_octree_ros/include/scene_octree_ros/SceneOcTree.h
 iostream

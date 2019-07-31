@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   octomap_ros
   roscpp
   rosplane_msgs
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions

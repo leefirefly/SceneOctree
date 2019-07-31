@@ -208,7 +208,7 @@ public:
         marker.mesh_resource = "package://scene_octree_ros/meshes/plane.stl";
         marker.mesh_use_embedded_materials = use_embedded_materials;
         marker.id = id;
-        marker.lifetime = ros::Duration();
+        marker.lifetime = ros::Duration(0.5);
 
         Octree_Marker_pub.publish(marker);
     }

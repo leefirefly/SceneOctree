@@ -24,7 +24,9 @@ using namespace octomath;
 
 void bagCallback(const abstract_msgs::QueryResult &msg)
 {
+	
 	abstract_msgs::QueryResult leafdata = msg;
+	
 	int planeID = leafdata.data.robotID;
 	plane_data[planeID - 1] = leafdata;
 	plane_pos[planeID - 1][0] = leafdata.data.robotPose.position.x;

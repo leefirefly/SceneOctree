@@ -13,6 +13,7 @@
 #include <string>
 
 #include "abstract_msgs/QueryResult.h"
+#include "geometry_msgs/Pose.h"
 
 /*
 int32 senderID
@@ -52,6 +53,8 @@ public:
     s.write((const char *)&_leafData.query_result.senderID, sizeof(int32_t));
     s.write((const char *)&_leafData.query_result.data.robotID, sizeof(int32_t));
     s.write((const char *)&_leafData.query_result.data.swarmID, sizeof(int32_t));
+    writePose(s, _leafData.query_result.data.robotPose);
+    writePose(s, _leafData.query_result.data.sensorPose);
     writeString(s, _leafData.query_result.layerName);
     writeString(s, _leafData.query_result.sceneName);
     writeString(s, _leafData.query_result.data.actorName);
@@ -70,6 +73,8 @@ public:
     s.read((char *)&_leafData.query_result.senderID, sizeof(int32_t));
     s.read((char *)&_leafData.query_result.data.robotID, sizeof(int32_t));
     s.read((char *)&_leafData.query_result.data.swarmID, sizeof(int32_t));
+    readPose(s, _leafData.query_result.data.robotPose);
+    readPose(s, _leafData.query_result.data.sensorPose);
     readString(s, _leafData.query_result.layerName);
     readString(s, _leafData.query_result.sceneName);
     readString(s, _leafData.query_result.data.actorName);
@@ -80,6 +85,30 @@ public:
     //s >> query_result.data.data;
     return s;
   };
+
+
+  static std::ostream &writePose(std::ostream &s, geometry_msgs::Pose _pos)
+  {
+    s.write((const char *)&_pos.position.x, sizeof(double));
+    s.write((const char *)&_pos.position.y, sizeof(double));
+    s.write((const char *)&_pos.position.z, sizeof(double));
+    s.write((const char *)&_pos.orientation.x, sizeof(double));
+    s.write((const char *)&_pos.orientation.y, sizeof(double));
+    s.write((const char *)&_pos.orientation.z, sizeof(double));
+    s.write((const char *)&_pos.orientation.w, sizeof(double));
+    return s;
+  }
+  static std::istream &readPose(std::istream &s, geometry_msgs::Pose &_pos)
+  {
+    s.read(( char *)&_pos.position.x, sizeof(double));
+    s.read(( char *)&_pos.position.y, sizeof(double));
+    s.read(( char *)&_pos.position.z, sizeof(double));
+    s.read(( char *)&_pos.orientation.x, sizeof(double));
+    s.read(( char *)&_pos.orientation.y, sizeof(double));
+    s.read(( char *)&_pos.orientation.z, sizeof(double));
+    s.read(( char *)&_pos.orientation.w, sizeof(double));
+    return s;
+  }
 
   static std::ostream &writeString(std::ostream &s, string _str)
   {

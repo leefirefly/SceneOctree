@@ -22,7 +22,7 @@ ros::Publisher Octree_Marker_pub;
 void publishCallback(const ros::TimerEvent &)
 {
     stringstream ss;
-    ss << "/home/lee_firefly/catkin_ws/data/planePos0.ot";
+    ss << "/home/lee_firefly/SceneOcTree/catkin_ll/src/octree_use/data/planePos0.ot";
     string filename = ss.str();
     SceneOcTreeMarker testR;
     testR.showFile(filename);
@@ -34,6 +34,8 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "sendMaker");
     ros::NodeHandle n;
     Octree_Marker_pub = n.advertise<visualization_msgs::Marker>("octree_markers", 10);
+   
+
     ros::Rate loop_rate(0.1);
     int count = 0;
     while (count < 10)
@@ -42,14 +44,14 @@ int main(int argc, char **argv)
         while (ros::ok())
         {
             stringstream ss;
-            ss << "/home/lee_firefly/catkin_ws/data/planePos"<<count<<".ot";
+            ss << "/home/lee_firefly/SceneOcTree/catkin_ll/src/octree_use/data/planePos" << count << ".ot";
             string filename = ss.str();
             SceneOcTreeMarker testR;
             testR.showFile(filename);
             ros::spinOnce();
             loop_rate.sleep();
             double end = ros::Time::now().toSec();
-            if((end-start)>2)
+            if ((end - start) > 2)
                 break;
         }
         count = count + 1;
