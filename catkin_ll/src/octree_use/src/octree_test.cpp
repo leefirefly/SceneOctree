@@ -53,8 +53,8 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
         cout << "write file::" << filename << endl;
         cout << "write file::" << TotalFileName << endl;
 
-        SceneOcTreeMarker octreeRvizShow;
-        octreeRvizShow.showSingleTree(&tree);
+        //SceneOcTreeMarker octreeRvizShow;
+        //octreeRvizShow.showSingleTree(&tree);
 
         flag = 5;
         msg_count = msg_count + 1;
@@ -137,13 +137,13 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
             for (SceneOcTree::leaf_iterator it = tree2->begin_leafs(), end = tree2->end_leafs(); it != end; ++it)
             {
                 SceneOcTreeNode *result = tree2->search(it.getKey());
-                //cout << "test file read, find sceneName::" << result->getScene().objectData.query_result << endl;
+                cout << "test file read, find sceneName::" << result->getScene().objectData.query_result << endl;
             }
             cout << "  read tree done" << endl;
         }
     }
-    /*
-    if (msg_count == 3)
+    
+    if (msg_count == 5)
     {
         string TotalFileName = "/home/lee_firefly/SceneOcTree/catkin_ll/src/octree_use/data/planePosALL.ot";
         vector<AbstractOcTree *> treeV;
@@ -170,7 +170,7 @@ void bagCallback(const abstract_msgs::QueryResult &msg)
             }
         }
     }
-    */
+    
 }
 
 int main(int argc, char **argv)

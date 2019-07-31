@@ -35,6 +35,7 @@
 #include <octomap/AbstractOcTree.h>
 #include <octomap/OcTree.h>
 #include <octomap/CountingOcTree.h>
+#include <unistd.h>
 
 
 namespace octomap {
@@ -53,7 +54,9 @@ namespace octomap {
        // TODO: check is_good of finished stream, return
        write(file);
        file.flush();
+       file.sync_with_stdio();
        file.close();
+       //sleep(5000);
      }
 
      return true;
@@ -70,6 +73,8 @@ namespace octomap {
     // write the actual data:
     writeData(s);
     // TODO: ret.val, checks stream?
+    s.flush();
+    s.sync_with_stdio();
     return true;
   }
 

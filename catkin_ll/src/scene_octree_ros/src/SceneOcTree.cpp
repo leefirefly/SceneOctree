@@ -11,16 +11,21 @@ namespace octomap
 std::ostream &SceneOcTreeNode::writeData(std::ostream &s) const
 {
   s.write((const char *)&value, sizeof(value)); // occupancy
-  s.write((const char *)&scene, sizeof(Scene)); // Scene
-
+  s.write((const char *)&scene.r, sizeof(uint8_t)); // Scene
+  s.write((const char *)&scene.g, sizeof(uint8_t)); // Scene
+  s.write((const char *)&scene.b, sizeof(uint8_t)); // Scene
+  octomath::LeafData::writeLeafData(s, scene.objectData);
   return s;
 }
 
 std::istream &SceneOcTreeNode::readData(std::istream &s)
 {
   s.read((char *)&value, sizeof(value)); // occupancy
-  s.read((char *)&scene, sizeof(Scene)); // Scene
-
+  s.read((char *)&scene.r, sizeof(uint8_t)); // Scene
+  s.read((char *)&scene.g, sizeof(uint8_t)); // Scene
+  s.read((char *)&scene.b, sizeof(uint8_t)); // Scene
+  octomath::LeafData::readLeafData(s,scene.objectData);
+  //cout << (unsigned int)scene.r<<scene.objectData.query_result.layerName<<endl;
   return s;
 }
 

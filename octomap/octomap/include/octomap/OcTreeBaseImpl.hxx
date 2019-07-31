@@ -763,7 +763,8 @@ namespace octomap {
   std::ostream& OcTreeBaseImpl<NODE,I>::writeData(std::ostream &s) const{
     if (root)
       writeNodesRecurs(root, s);
-
+    s.flush();
+    s.sync_with_stdio();
     return s;
   }
 
@@ -793,7 +794,8 @@ namespace octomap {
         this->writeNodesRecurs(getNodeChild(node, i), s);
       }
     }
-
+    s.flush();
+    s.sync_with_stdio();
     return s;
   }
 

@@ -12,6 +12,9 @@ std::ostream &SceneOcTreeNode::writeData(std::ostream &s) const
 {
   s.write((const char *)&value, sizeof(value)); // occupancy
   s.write((const char *)&scene, sizeof(Scene)); // Scene
+  s.flush();
+  s.sync_with_stdio();
+  
   //cout << "test Node writeData" << scene.objectData.actorName << endl;
   return s;
 }

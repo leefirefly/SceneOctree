@@ -44,14 +44,93 @@ public:
   LeafData();
   ~LeafData();
   LeafData(const abstract_msgs::QueryResult &query_result);
- //LeafData(const int &query_result);
+  //LeafData(const int &query_result);
+  static std::ostream &writeLeafData(std::ostream &s, LeafData _leafData)
+  {
+    s.write((const char *)&_leafData.query_result.count, sizeof(int32_t));
+    s.write((const char *)&_leafData.query_result.receiverID, sizeof(int32_t));
+    s.write((const char *)&_leafData.query_result.senderID, sizeof(int32_t));
+    s.write((const char *)&_leafData.query_result.data.robotID, sizeof(int32_t));
+    s.write((const char *)&_leafData.query_result.data.swarmID, sizeof(int32_t));
+    writeString(s, _leafData.query_result.layerName);
+    writeString(s, _leafData.query_result.sceneName);
+    writeString(s, _leafData.query_result.data.actorName);
+    writeString(s, _leafData.query_result.data.dataType);
+    writeString(s, _leafData.query_result.data.taskName);
+    writeString(s, _leafData.query_result.data.timeStamp);
+    writeDataVec(s, _leafData.query_result.data.data);
+    //s << query_result.data.data;
+    return s;
+  };
+
+  static std::istream &readLeafData(std::istream &s, LeafData &_leafData)
+  {
+    s.read((char *)&_leafData.query_result.count, sizeof(int32_t));
+    s.read((char *)&_leafData.query_result.receiverID, sizeof(int32_t));
+    s.read((char *)&_leafData.query_result.senderID, sizeof(int32_t));
+    s.read((char *)&_leafData.query_result.data.robotID, sizeof(int32_t));
+    s.read((char *)&_leafData.query_result.data.swarmID, sizeof(int32_t));
+    readString(s, _leafData.query_result.layerName);
+    readString(s, _leafData.query_result.sceneName);
+    readString(s, _leafData.query_result.data.actorName);
+    readString(s, _leafData.query_result.data.dataType);
+    readString(s, _leafData.query_result.data.taskName);
+    readString(s, _leafData.query_result.data.timeStamp);
+    readDataVec(s,_leafData.query_result.data.data);
+    //s >> query_result.data.data;
+    return s;
+  };
+
+  static std::ostream &writeString(std::ostream &s, string _str)
+  {
+    s << _str.size() << "\n";
+    s << _str;
+    return s;
+  }
+  static std::istream &readString(std::istream &s, string &_str)
+  {
+    std::string line;
+    std::getline(s, line);
+    std::istringstream tmp(line);
+    std::size_t size;
+    tmp >> size;
+    std::vector<char> result(size);
+    s.read(result.data(), size);
+    _str = string(result.begin(), result.end());
+    result.clear();
+    return s;
+  }
+
+  static std::ostream &writeDataVec(std::ostream &s, std::vector<uint8_t> _data)
+  {
+    s << _data.size()<< "\n";
+    for (std::vector<uint8_t>::iterator it = _data.begin(); it != _data.end(); ++it)
+    {
+      s.write((const char *)&(*it), sizeof(uint8_t));
+    }
+    return s;
+  }
+  static std::istream &readDataVec(std::istream &s, std::vector<uint8_t> &_data)
+  {
+    std::string line;
+    std::getline(s, line);
+    std::istringstream tmp(line);
+    std::size_t size;
+    tmp >> size;
+    for(int i = 0; i<size; i++)
+    {
+      uint8_t tmp;
+      s.read((char *)&tmp, sizeof(uint8_t));
+      _data.push_back(tmp);
+    }
+    return s;
+  }
 
   LeafData &operator=(const LeafData &other);
-//  bool operator==(const LeafData &other) const;
-//  bool operator!=(const LeafData &other) const;
+  //  bool operator==(const LeafData &other) const;
+  //  bool operator!=(const LeafData &other) const;
 
   abstract_msgs::QueryResult query_result;
-  
 };
 //std::ostream &operator<<(std::ostream &s, const LeafData &p);
 } // namespace octomath
