@@ -32,6 +32,7 @@ std::istream &SceneOcTreeNode::readData(std::istream &s)
 bool SceneOcTree::writeTrees(const std::string &filename) const
 {
   std::ofstream file(filename.c_str(), std::ios_base::in | std::ios_base::out | std::ios_base::ate | std::ios_base::binary);
+
   //file not exist
   if (!file.is_open())
   {
@@ -68,6 +69,22 @@ bool SceneOcTree::writeTrees(std::ostream &s) const
   //OcTreeBaseImpl::writeData(s);
   writeData(s);
   // TODO: ret.val, checks stream?
+  return true;
+}
+
+bool SceneOcTree::writeTreeV(const std::string &filename, vector<SceneOcTree*>treeV)const
+{
+  for(vector<SceneOcTree*>::iterator it = treeV.begin();it != treeV.end();++it)
+  {
+    if((*it)->writeTrees(filename))
+    {
+      continue;
+    }
+    else
+    {
+      return false;
+    }
+  }
   return true;
 }
 
@@ -143,6 +160,7 @@ int SceneOcTree::readTrees(const std::string &filename, vector<AbstractOcTree *>
     return count;
   }
 }
+
 bool SceneOcTree::readHeader(std::istream &s, std::string &id, unsigned &size, double &res)
 {
   id = "";
@@ -478,6 +496,60 @@ SceneOcTree *SceneOcTree::getRobotInfoByBox(float xMin, float xMax, float yMin, 
     return newTree;
   }
   */
+}
+
+int getRobotOfTreesByBox(float xMin,float xMax, float yMin, float yMax,float zMin, float zMax,const std::string &filename, vector<SceneOcTree *> &treeVector)
+{
+  int count = 0;
+  vector<AbstractOcTree *> treeV;
+  int treeCount = SceneOcTree::readTrees(filename, treeV);
+  for (vector<AbstractOcTree *>::iterator it = treeV.begin(); it != treeV.end(); ++it)
+  {
+    if (SceneOcTree *treefromV = dynamic_cast<SceneOcTree *>(*it))
+    {
+      SceneOcTree *result = SceneOcTree::getRobotInfoByBox(xMin,xMax,yMin,yMax,zMin,zMax, treefromV);
+      if (result != NULL)
+      {
+        treeVector.push_back(result);
+        count = count + 1;
+      }
+    }
+  }
+  return count;
+}
+
+SceneOcTree *SceneOcTree::getRobotInfoByBS(const Search search, float xMin,float xMax, float yMin, float yMax,float zMin, float zMax, const SceneOcTree *tree)
+{
+  SceneOcTree *result_box = getRobotInfoByBox(xMin,xMax,yMin,yMax,zMin,zMax,tree);
+  if(result_box != NULL)
+  {
+    return getRobotInfoBySearch(search,result_box);
+  }
+  else
+  {
+    return NULL;
+  }
+  
+}
+
+int SceneOcTree::getRobotOfTreesByBS(const Search search, float xMin,float xMax, float yMin, float yMax,float zMin, float zMax,const std::string &filename, vector<SceneOcTree *> &treeVector)
+{
+  int count = 0;
+  vector<AbstractOcTree *> treeV;
+  int treeCount = SceneOcTree::readTrees(filename, treeV);
+  for (vector<AbstractOcTree *>::iterator it = treeV.begin(); it != treeV.end(); ++it)
+  {
+    if (SceneOcTree *treefromV = dynamic_cast<SceneOcTree *>(*it))
+    {
+      SceneOcTree *result = SceneOcTree::getRobotInfoByBS(search,xMin,xMax,yMin,yMax,zMin,zMax, treefromV);
+      if (result != NULL)
+      {
+        treeVector.push_back(result);
+        count = count + 1;
+      }
+    }
+  }
+  return count;
 }
 
 /* 

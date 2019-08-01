@@ -220,24 +220,44 @@ public:
 
   // uses gnuplot to plot a RGB histogram in EPS format
   void writeSceneHistogram(std::string filename);
+
+  // write multiple trees to file 
   bool writeTrees(const std::string &filename) const;
   bool writeTrees(std::ostream &s) const;
+  bool writeTreeV(const std::string &filename, vector<SceneOcTree*>treeV)const;
+  
 
+  // read trees from a file
   static int readTrees(const std::string &filename, vector<AbstractOcTree *> &treeVecotor);
+  
+  //this is from AbstractTree
   static bool readHeader(std::istream &s, std::string &id, unsigned &size, double &res);
   static AbstractOcTree *createTree(const std::string class_name, double res);
 
+  // search from a tree by RobotID
   static SceneOcTreeNode *getRobotInfoByRobotId(const int id, const SceneOcTree *tree);
+  // search from a file by RobotID
   static int getRobotOfTreesByRobotId(const int id, const std::string &filename, vector<SceneOcTreeNode *> &nodeVector);
 
+  // search from a tree by Search ( multiple conditions: e.g.: taskName = "" && SenderID = "" )
   static SceneOcTree *getRobotInfoBySearch(const Search search, const SceneOcTree *tree);
+  // search from a file by Search
   static int getRobotOfTreesBySearch(const Search search, const std::string &filename, vector<SceneOcTree *> &treeVector);
 
+  // search from a tree by Box (an area) 
   static SceneOcTree *getRobotInfoByBox(float xMin,float xMax, float yMin, float yMax,float zMin, float zMax, const SceneOcTree *tree);
+  // search from a file by Box
+  static int getRobotOfTreesByBox(float xMin,float xMax, float yMin, float yMax,float zMin, float zMax,const std::string &filename, vector<SceneOcTree *> &treeVector);
+
+  // search from a tree by Search and Box
+  static SceneOcTree *getRobotInfoByBS(const Search search, float xMin,float xMax, float yMin, float yMax,float zMin, float zMax, const SceneOcTree *tree);
+  // search from a file by Search and Box
+  static int getRobotOfTreesByBS(const Search search, float xMin,float xMax, float yMin, float yMax,float zMin, float zMax,const std::string &filename, vector<SceneOcTree *> &treeVector);
+
+
 
 protected:
   void updateInnerOccupancyRecurs(SceneOcTreeNode *node, unsigned int depth);
-
   /**
      * Static member object which ensures that this OcTree's prototype
      * ends up in the classIDMapping only once. You need this as a 

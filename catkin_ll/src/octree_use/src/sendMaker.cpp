@@ -51,7 +51,7 @@ int main(int argc, char **argv)
             ros::spinOnce();
             loop_rate.sleep();
             double end = ros::Time::now().toSec();
-            if ((end - start) > 2)
+            if ((end - start) > 1)
                 break;
         }
         count = count + 1;
